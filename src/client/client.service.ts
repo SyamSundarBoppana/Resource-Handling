@@ -42,4 +42,8 @@ export class ClientService {
       return this.clientRepository.save(client);
     }
   }
+
+  findByStatus(status:string):Promise<Client[]>{
+    return this.clientRepository.findBy({Status:`${status}`});
+  }
 }

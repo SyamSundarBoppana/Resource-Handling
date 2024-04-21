@@ -18,7 +18,7 @@ export class Client {
   @Column({default:""})
   clientLogo: string;
 
-  @Column({default:""})
+  @Column({default:"Active"})
   Status:string;
 
   @OneToMany(() => Project, (project) => project.client)
