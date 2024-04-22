@@ -28,6 +28,14 @@ export class ClientController {
     return this.clientService.findAll();
   }
 
+  @Patch(':id')
+  updateClient(
+    @Param('id') id: string,
+    @Body() updateClientDto: UpdateClientDto,
+  ) {
+    return this.clientService.update(+id, updateClientDto);
+  }
+
   @ApiParam({
     name: 'status',
     required: true,
@@ -38,14 +46,6 @@ export class ClientController {
   }
 
   @Patch('status/:id')
-  updateClient(
-    @Param('id') id: string,
-    @Body() updateClientDto: UpdateClientDto,
-  ) {
-    return this.clientService.update(+id, updateClientDto);
-  }
-
-  @Patch(':id')
   updateClientStatus(@Param('id') id: string) {
     return this.clientService.updateStatusById(+id);
   }
