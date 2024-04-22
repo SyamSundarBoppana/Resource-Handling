@@ -4,7 +4,6 @@ import { Project } from './entity/project.entity';
 import { Repository } from 'typeorm';
 import { CreateProjectDto } from './dto/create.project.dto';
 import { UpdateProjectDto } from './dto/update.project.dto';
-import { Client } from 'src/client/entity/client.entity';
 
 @Injectable()
 export class ProjectService {

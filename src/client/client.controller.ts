@@ -34,16 +34,19 @@ export class ClientController {
   })
   @Get('/status:status')
   findClientsByStatus(@Param('status') status: string) {
-    console.log(status);
     return this.clientService.findByStatus(status);
   }
 
-  @Patch(':id')
+  @Patch('status/:id')
   updateClient(
     @Param('id') id: string,
     @Body() updateClientDto: UpdateClientDto,
   ) {
-    console.log(id);
     return this.clientService.update(+id, updateClientDto);
+  }
+
+  @Patch(':id')
+  updateClientStatus(@Param('id') id: string) {
+    return this.clientService.updateStatusById(+id);
   }
 }

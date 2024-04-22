@@ -19,7 +19,7 @@ export class Client {
   clientLogo: string;
 
   @Column({default:"Active"})
-  Status:string;
+  status:string;
 
   @OneToMany(() => Project, (project) => project.client)
     projects: Project[]

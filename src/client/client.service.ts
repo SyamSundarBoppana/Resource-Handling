@@ -23,9 +23,11 @@ export class ClientService {
 
   findAll(): Promise<Client[]> {
     return this.clientRepository.find({
-      relations:{
-        projects:true
-      }
+      relations: {
+        projects: {
+          resources: true,
+        },
+      },
     });
   }
 
@@ -43,7 +45,29 @@ export class ClientService {
     }
   }
 
-  findByStatus(status:string):Promise<Client[]>{
-    return this.clientRepository.findBy({Status:`${status}`});
+  findByStatus(status: string): Promise<Client[]> {
+    return this.clientRepository.findBy({ status: `${status}` });
+  }
+
+  async updateStatusById(id: number): Promise<Client> {
+    const existingClient = await this.clientRepository.findOneBy({ id });
+    if (!existingClient) {
+      throw new HttpException('Client Not Found', HttpStatus.NOT_FOUND);
+    } else {
+      if (existingClient.status == 'Active') {
+        const client = {
+          ...existingClient,
+          status: 'InActive',
+        };
+        console.log('test', client);
+        return this.clientRepository.save(client);
+      } else {
+        const client = {
+          ...existingClient,
+          status: 'Active',
+        };
+        return this.clientRepository.save(client);
+      }
+    }
   }
 }
